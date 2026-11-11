@@ -126,6 +126,13 @@ class RecordsTest(unittest.TestCase):
             self.assertEqual(run.returncode, 2)
             self.assertFalse(path.exists())
 
+    def test_domain_boundary(self):
+        first, second = copy.deepcopy(self.records[:2])
+        first.update(responded=0, adoption=None)
+        result = describe([first])
+        self.assertIsNone(result['adoption_weighted'])
+        self.assertEqual(result['response_weight'], 0)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -9,11 +9,15 @@
 | `observation_id` | str | 必填 |
 | `firm` | str | 必填 |
 | `region` | str | 必填 |
-| `size_class` | str | 允许空值，空值不是零 |
-| `industry` | str | 允许空值，空值不是零 |
-| `adoption` | float | 必填 |
-| `responded` | int | 允许空值，空值不是零 |
-| `base_weight` | float | 允许空值，空值不是零 |
-| `wave` | int | 允许空值，空值不是零 |
+| `size_class` | str | 必填 |
+| `industry` | str | 必填 |
+| `adoption` | float | 允许空值，空值不是零 |
+| `responded` | int | 必填 |
+| `base_weight` | float | 必填 |
+| `wave` | int | 必填 |
 
 时间字段 day、week、tick、hour、minute、cycle、start_day、reported_day、known_at、visible_at、opened、observed 均以各字段名所述的相对时间单位表示整数；不同字段并不必然代表同一种时间。缺少的登记码与浓度等信息保持为空。示例只表达产品数据结构，不能代替实际调查资料。
+
+## 业务字段语义
+
+adoption 是响应企业的二元采用结果；responded=0 时必须保留 adoption 为空，不代表不采用。base_weight 是基础抽样权重。wave 为调查期，region、size_class、industry 为总体边际维度。
