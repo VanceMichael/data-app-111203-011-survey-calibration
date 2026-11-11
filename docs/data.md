@@ -21,3 +21,5 @@
 ## 业务字段语义
 
 adoption 是响应企业的二元采用结果；responded=0 时必须保留 adoption 为空，不代表不采用。base_weight 是基础抽样权重。wave 为调查期，region、size_class、industry 为总体边际维度。
+
+同一 firm 在同一 wave 最多有一条记录，跨 wave 可以重复接受调查。
