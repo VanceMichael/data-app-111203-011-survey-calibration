@@ -11,6 +11,7 @@ def load_records(path):
     converters = {'str': str, 'float': float, 'int': int}
     rows = []
     seen = set()
+    seen_firm_wave = {}
     with Path(path).open(encoding='utf-8', newline='') as handle:
         reader = csv.DictReader(handle)
         missing = set(FIELDS) - set(reader.fieldnames or [])
@@ -35,6 +36,10 @@ def load_records(path):
             if row['observation_id'] in seen:
                 raise ValueError('重复观测编号：' + row['observation_id'])
             seen.add(row['observation_id'])
+            duplicated = seen_firm_wave.setdefault((row['firm'], row['wave']), row['observation_id'])
+            if duplicated != row['observation_id']:
+                raise ValueError(
+                    f'同一主体在同一调查期重复观测：{row["firm"]}/wave {row["wave"]}')
             rows.append(row)
     return rows
 
